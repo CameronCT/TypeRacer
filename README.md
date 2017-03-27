@@ -1,2 +1,2 @@
 # TypeRacer
-TypeRacer Discord bot
+A discord bot for TypeRacer Discord

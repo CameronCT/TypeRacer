@@ -1,0 +1,21 @@
+{
+  "name": "typeracer",
+  "version": "1.0.0",
+  "description": "Bot for TypeRacer Discord",
+  "main": "app.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/CameronCT/TypeRacer.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/CameronCT/TypeRacer/issues"
+  },
+  "homepage": "https://github.com/CameronCT/TypeRacer#readme",
+  "dependencies": {
+    "discord.js": "^11.0.0",
+    "html-entities": "^1.2.0",
+    "request": "^2.79.0"
+  }
+}
