@@ -26,18 +26,22 @@ client.on('ready', () => {
 });
 
 client.on('message', message => {
-
-    // General
+    // Commands
     require(__dirname + '/commands/help.js')(Discord,Config,message);
     require(__dirname + '/commands/changelog.js')(Discord,Config,message);
     require(__dirname + '/commands/stats.js')(Discord,request,Config,message);
     require(__dirname + '/commands/wpm.js')(Config,message);
     require(__dirname + '/commands/import.js')(Config,message,request);
-
-    // PUG
-    //require(__dirname + '/commands/pug.js')(Config,message);
-
 });
+
+client.on('debug', debug => { 
+    console.log(debug);
+});
+
+client.on('error', error => { 
+    console.log(error);
+});
+
 client.login(Config.Discord);
 
 /* Log */
