@@ -12,13 +12,16 @@ Welcome to ` + Config.name + ` created by ` + Config.author + `!
 !wpm - *Check details statistics on a given quote*
 
 **Updates**
+*3/26/2017:*
+    - Changed style of !s(tats).
+    - Corrected bug on !wpm
+    - Corrected bug on !s(tats) with Last Best 10
 *2/25/2017:*
     - Made Bot reconnect itself when no activity in server.
     - Updated !stats command and made it say "Last Best 10"
     - Made !import check the TypeRacer API before adding to TypeRacerData's Queue
 
 If you want to contribute, you may check out the repository on GitHub at https://github.com/CameronCT/TypeRacer/
-
 This bot is powered by http://typeracerdata.com/
         `);
     }

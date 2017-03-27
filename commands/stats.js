@@ -1,23 +1,20 @@
-var Func        = require('../libs/functions.js');
+const Func        = require('../libs/functions.js');
 
-var options = {
+let options = {
     weekday: "long", year: "numeric", month: "short",
     day: "numeric", hour: "2-digit", minute: "2-digit"
 };
 
 module.exports = function(Discord,request,Config,message) {
     if (Func.isCommand(message, '!stats') || Func.isCommand(message, '!s')) {
-        var params = Func.getParams(message);
-        if (!params[1]) return message.reply("**SYNTAX:** !stats <username>");
+        if (!Func.getParams(message)) return message.reply("**SYNTAX:** !stats <username>");
 
-        request.get('http://typeracerdata.com/api?username=' + params[1], function(error, response, body) {    
-            if (error || !body|| response.statusCode != 200) return message.reply("The username you have entered could not be found, please try again!");
+        request.get('http://typeracerdata.com/api?username=' + Func.getParams(message)[1], function(error, response, body) {    
+            if (error || !body || response.statusCode != 200) return message.reply("The username you have entered could not be found, please try again!");
             data = JSON.parse(body);
             
-            var last = new Date(data.account.last_import * 1000);
-            var marathon = new Date(data.account.marathon_start * 1000);
-
-            var blank = ' ';
+            let last = new Date(data.account.last_import * 1000);
+            let marathon = new Date(data.account.marathon_start * 1000);
 
             const startEmbed = new Discord.RichEmbed()
                 .setColor('#00B2EE')

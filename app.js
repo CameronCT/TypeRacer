@@ -1,11 +1,11 @@
 console.log("Starting Discord Bot!");
 
 /* Depends */
-var     request             = require('request');
-var     Config              = require(__dirname + '/libs/config.js');
-var     Entities            = require('html-entities').XmlEntities;
-const   Discord             = require('discord.js');
-const   client              = new Discord.Client({autoReconnect:true});
+const     request             = require('request');
+const     Config              = require(__dirname + '/libs/config.js');
+const     Entities            = require('html-entities').XmlEntities;
+const     Discord             = require('discord.js');
+const     client              = new Discord.Client({autoReconnect:true});
 
 /* Bot */
 client.on('ready', () => {
