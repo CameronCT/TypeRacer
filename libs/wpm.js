@@ -92,7 +92,7 @@ module.exports = {
         res += "**Total Typed Characters (including typos):** \n    " + num_chars + "\n\n";
         res += "**Time:** \n    " + total_time/1000 + " seconds\n\n";
         res += "**WPM (Assumed 100% Accuracy):** \n    " + (num_chars/total_time*1000*60/5).toFixed(2) + " WPM\n\n";
-        res += "Created by **Mitch (canissimia)**. If you want more statistics, please visit: https://jsfiddle.net/canissimia/9z8qcta7/";
+        res += "Created by **Mitch (pentothal)**. If you want more statistics, please visit: https://jsfiddle.net/canissimia/9z8qcta7/";
         return res;
     }
 
