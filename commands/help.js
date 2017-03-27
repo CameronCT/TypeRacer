@@ -1,35 +1,28 @@
 var Func        = require('../libs/functions.js');
 
-module.exports = function(Config,message) {
+module.exports = function(Discord,Config,message) {
     if (Func.isCommand(message, '!help') || Func.isCommand(message, '!h')) {
-        message.channel.sendMessage(`
-Welcome to ` + Config.name + ` created by ` + Config.author + `!
+        const helpEmbed = new Discord.RichEmbed()
+            .setColor('#00FF00')
+            .setDescription(`
+                Welcome to **` + Config.name + `** created by **` + Config.author + `**!
 
-**General**
-!h(elp) - *The command you are currently viewing*
-!s(tats) - *Find statistics of a TypeRacer User*
-!i(mport) - *Import user to TypeRacerData*
-!wpm - *Check details statistics on a given quote*
+                **General**
+                !h(elp) - *The command you are currently viewing*
+                !s(tats) - *Find statistics of a TypeRacer User*
+                !i(mport) - *Import user to TypeRacerData*
+                !wpm - *Check details statistics on a given quote*
+                !c(hangelog) - *Update logs of the Discord bot*
 
-**Updates**
-*3/26/2017:*
-    - Changed style of !s(tats).
-    - Corrected bug on !wpm
-    - Corrected bug on !s(tats) with Last Best 10
-*2/25/2017:*
-    - Made Bot reconnect itself when no activity in server.
-    - Updated !stats command and made it say "Last Best 10"
-    - Made !import check the TypeRacer API before adding to TypeRacerData's Queue
+                If you want to contribute, you may check out the repository on GitHub at https://github.com/CameronCT/TypeRacer/
+                This bot is powered by http://typeracerdata.com/
+            `)
+        ;
 
-If you want to contribute, you may check out the repository on GitHub at https://github.com/CameronCT/TypeRacer/
-This bot is powered by http://typeracerdata.com/
-        `);
+        try { 
+            message.channel.sendEmbed(helpEmbed);
+        } catch (err) {
+            message.channel.reply('There was a problem, please try again!');
+        }
     }
 }
-
-/*
-**PUG (experimental)**
-!a(dd) - *Adds you to PUG Queue*
-!r(emove) - *Removes you from PUG Queue*
-!w(ho) - *Returns a list of Added racers*
-*/

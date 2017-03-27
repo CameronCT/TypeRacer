@@ -1,8 +1,8 @@
-var Func        = require('../libs/functions.js');
+const Func        = require('../libs/functions.js');
 
 module.exports = function(Config,message,request) {
     if (Func.isCommand(message, '!import') || Func.isCommand(message, '!i')) {
-        var params = Func.getParams(message);
+        let params = Func.getParams(message);
         if (!params[1]) return message.reply("**SYNTAX:** !import <username>");
         request.get('http://typeracerdata.appspot.com/users?id=tr:' + params[1], function(error, response, body) {    
             if (error || !body || response.statusCode != 200) return message.reply("The username you have entered could not be found, please try again!");

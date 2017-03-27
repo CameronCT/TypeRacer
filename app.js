@@ -28,7 +28,8 @@ client.on('ready', () => {
 client.on('message', message => {
 
     // General
-    require(__dirname + '/commands/help.js')(Config,message);
+    require(__dirname + '/commands/help.js')(Discord,Config,message);
+    require(__dirname + '/commands/changelog.js')(Discord,Config,message);
     require(__dirname + '/commands/stats.js')(Discord,request,Config,message);
     require(__dirname + '/commands/wpm.js')(Config,message);
     require(__dirname + '/commands/import.js')(Config,message,request);
