@@ -1,0 +1,2 @@
+# TypeRacer
+TypeRacer Discord bot
