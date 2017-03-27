@@ -28,7 +28,9 @@ client.on('ready', () => {
 client.on("guildMemberAdd", (member) => {
     if (!member.bot) {
         const guild = member.guild;
-        guild.channels.get(guild.id).sendMessage(member + `, Welcome to the TypeRacer Discord!`);
+        guild.channels.get(guild.id).sendMessage(
+            `Welcome to the TypeRacer Discord, ` + member + `!
+        `);
     }
 });
 
