@@ -25,6 +25,13 @@ client.on('ready', () => {
     }, 5 * 1000);
 });
 
+client.on("guildMemberAdd", (member) => {
+    if (!member.bot) {
+        const guild = member.guild;
+        guild.channels.get(guild.id).sendMessage(member + `, Welcome to the TypeRacer Discord!`);
+    }
+});
+
 client.on('message', message => {
     // Commands
     require(__dirname + '/commands/help.js')(Discord,Config,message);
