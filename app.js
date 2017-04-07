@@ -10,26 +10,31 @@ const     client              = new Discord.Client({autoReconnect:true});
 /* Bot */
 client.on('ready', () => {
     console.log('Bot has successfully started');
+    client.user.setGame('TypeRacer')
 
     /* All strings below are community entered */
     var Games = [
         "piss and shit",
         "shaz's arthiritis simulator",
         "300ms start simulator",
-        "nonquits",
-        "with fuccbois"
+        "nonquit",
+        "i dont select races",
+        "ctrl+s",
+        "rip kenny 2017",
+        "TRData Championship",
+        "House of Typing"
     ];
     setInterval(function() {
         var random = Math.floor(Math.random()*(Games.length-0+1)+0);
         client.user.setGame(Games[random]);
-    }, 5 * 1000);
+    }, 2 * 1000);
 });
 
 client.on("guildMemberAdd", (member) => {
     if (!member.bot) {
         const guild = member.guild;
         guild.channels.get(guild.id).sendMessage(
-            `Welcome to the TypeRacer Discord, ` + member + `!
+            `Welcome to the Discord, ` + member + `!
         `);
     }
 });

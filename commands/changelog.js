@@ -7,6 +7,11 @@ module.exports = function(Discord,Config,message) {
         const changeLogEmbed = new Discord.RichEmbed()
             .setColor('#FF0000')
             .setDescription(`
+                **CHANGELOG FOR 4/7/2017**
+                - Fixed Last 10
+                - Added URL to !s(tats)
+                - Added list of Tournaments to !h(elp)
+
                 **CHANGELOG FOR 3/27/2017**
                 - Added Welcome Greeting
                 

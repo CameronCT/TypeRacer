@@ -18,6 +18,7 @@ module.exports = function(Discord,request,Config,message) {
 
             const startEmbed = new Discord.RichEmbed()
                 .setColor('#00B2EE')
+                .setURL('http://www.typeracerdata.com/profile?username=' + data.account.username)
                 .setThumbnail(`http://data.typeracer.com/misc/pic?uid=tr:` + data.account.username + `&size=large&bpc=1`)
                 .setAuthor(`Statistics for ` + data.account.username)
                 .setDescription(`
@@ -31,7 +32,7 @@ module.exports = function(Discord,request,Config,message) {
                 .addField('Career Avg:', parseFloat(data.account.wpm_life).toFixed(2) + ` WPM`)
                 .addField('Highest:', parseFloat(data.account.wpm_highest).toFixed(2) + ` WPM`)
                 .addField('Text Bests:', parseFloat(data.account.wpm_textbests).toFixed(2) + ` WPM`)
-                .addField('Last Best 10:', parseFloat(data.account.wpm_bestlast10).toFixed(2) + ` WPM ` + `(` + parseFloat(data.account.wpm_bestlast10).toFixed(2) + ` peak)`)
+                .addField('Last 10:', parseFloat(data.account.wpm_last10).toFixed(2) + ` WPM ` + `(` + parseFloat(data.account.wpm_bestlast10).toFixed(2) + ` peak)`)
                 .setFooter(`Last Imported: ` + last.toLocaleTimeString("en-us", options))
             ;
 
