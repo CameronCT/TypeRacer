@@ -33,9 +33,24 @@ client.on('ready', () => {
 client.on("guildMemberAdd", (member) => {
     if (!member.bot) {
         const guild = member.guild;
-        guild.channels.get(guild.id).sendMessage(
-            `Welcome to the Discord, ` + member + `!
-        `);
+        if (member.displayName == 'CRDM') {
+            guild.channels.get(guild.id).sendMessage(
+                `Welcome to the Discord, ` + member + `!
+            `);
+            guild.channels.get(guild.id).sendMessage(`
+                By the way, make a Discord account so I don't have to bug you anymore
+            `);
+            guild.channels.get(guild.id).sendMessage(`
+                Does this annoy you yet?
+            `);
+            guild.channels.get(guild.id).sendMessage(`
+                Just remember that, everytime you join this will appear unless you make a Discord account.
+            `);
+        } else { 
+            guild.channels.get(guild.id).sendMessage(
+                `Welcome to the Discord, ` + member + `!
+            `);
+        }
     }
 });
 
