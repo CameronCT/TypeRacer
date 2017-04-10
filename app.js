@@ -33,38 +33,26 @@ client.on('ready', () => {
 client.on("guildMemberAdd", (member) => {
     if (!member.bot) {
         const guild = member.guild;
-        if (member.displayName == 'CRDM') {
-            guild.channels.get(guild.id).sendMessage(
-                `Welcome to the Discord, ` + member + `!
-            `);
-            guild.channels.get(guild.id).sendMessage(`
-                By the way, make a Discord account so I don't have to bug you anymore
-            `);
-            guild.channels.get(guild.id).sendMessage(`
-                Does this annoy you yet?
-            `);
-            guild.channels.get(guild.id).sendMessage(`
-                Just remember that, everytime you join this will appear unless you make a Discord account.
-            `);
-        } else { 
-            guild.channels.get(guild.id).sendMessage(
-                `Welcome to the Discord, ` + member + `!
-            `);
-        }
+        guild.channels.get(guild.id).sendMessage(`Welcome to the Discord, ` + member + `! `);
     }
 });
 
-client.on('message', message => {
+client.on('message',  message => {
+
+    // Debug
+    console.log(`(${message.guild.name} / #${message.channel.name}) ${message.author.username}: ${message.content}`);
+
     // Commands
     require(__dirname + '/commands/help.js')(Discord,Config,message);
     require(__dirname + '/commands/changelog.js')(Discord,Config,message);
     require(__dirname + '/commands/stats.js')(Discord,request,Config,message);
     require(__dirname + '/commands/wpm.js')(Config,message);
     require(__dirname + '/commands/import.js')(Config,message,request);
-});
 
-client.on('debug', debug => { 
-    console.log(debug);
+    // Ping
+    if (message.content === '!ping') {
+        message.channel.reply('pong i guess');
+    }
 });
 
 client.on('error', error => { 

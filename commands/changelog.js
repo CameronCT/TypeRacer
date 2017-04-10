@@ -2,11 +2,16 @@ const Func        = require('../libs/functions.js');
 
 module.exports = function(Discord,Config,message) {
     if (Func.isCommand(message, '!changelog') || Func.isCommand(message, '!c')) {
-        if (!Func.getParams(message)) return message.reply("**SYNTAX:** !changelog");
+        if (!Func.getParams(message)) return message.channel.reply("**SYNTAX:** !changelog");
 
         const changeLogEmbed = new Discord.RichEmbed()
             .setColor('#FF0000')
             .setDescription(`
+                **CHANGELOG FOR 4/10/2017**
+                - Improved consistencies in Code (Not having 2 different things that do the same thing)
+                - Improved !stats
+                - Removed CRDM troll messages
+
                 **CHANGELOG FOR 4/7/2017**
                 - Fixed Last 10
                 - Added URL to !s(tats)
@@ -33,7 +38,7 @@ module.exports = function(Discord,Config,message) {
         try { 
             message.channel.sendEmbed(changeLogEmbed);
         } catch (err) {
-            message.channel.reply('There was a problem, please try again!');
+            message.channel.reply('There was a problem, please try again later!');
         }
     }
 }

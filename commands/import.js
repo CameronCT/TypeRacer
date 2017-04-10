@@ -9,7 +9,10 @@ module.exports = function(Config,message,request) {
             request
                 .get('http://www.typeracerdata.com/import?username=' + params[1])
                 .on('response', function(response) {
-                    if (response.statusCode == 200) message.reply("You have successfully added **" + params[1] + "** to the queue!");
+                    if (response.statusCode == 200) 
+                        return message.channel.reply("You have successfully added **" + params[1] + "** to the queue!");
+                    else
+                        return message.channel.reply("Uh oh! Something went wrong adding to the queue, please try again later!");
                 });
         });
     }
