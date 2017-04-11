@@ -2,7 +2,7 @@ const Func        = require('../libs/functions.js');
 
 module.exports = function(Discord,Config,message) {
     if (Func.isCommand(message, '!changelog') || Func.isCommand(message, '!c')) {
-        if (!Func.getParams(message)) return message.channel.reply("**SYNTAX:** !changelog");
+        if (!Func.getParams(message)) return message.reply("**SYNTAX:** !changelog");
 
         const changeLogEmbed = new Discord.RichEmbed()
             .setColor('#FF0000')
@@ -38,7 +38,7 @@ module.exports = function(Discord,Config,message) {
         try { 
             message.channel.sendEmbed(changeLogEmbed);
         } catch (err) {
-            message.channel.reply('There was a problem, please try again later!');
+            message.reply('There was a problem, please try again later!');
         }
     }
 }

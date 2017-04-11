@@ -27,7 +27,7 @@ module.exports = function(Discord,Config,message) {
         try { 
             message.channel.sendEmbed(helpEmbed);
         } catch (err) {
-            message.channel.reply('There was a problem, please try again!');
+            message.reply('There was a problem, please try again!');
         }
     }
 }

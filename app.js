@@ -51,7 +51,7 @@ client.on('message',  message => {
 
     // Ping
     if (message.content === '!ping') {
-        message.channel.reply('pong i guess');
+        message.reply('pong i guess');
     }
 });
 

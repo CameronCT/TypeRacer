@@ -7,14 +7,14 @@ let options = {
 
 module.exports = function(Discord,request,Config,message) {
     if (Func.isCommand(message, '!stats') || Func.isCommand(message, '!s')) {
-        if (!Func.getParams(message)) return message.channel.reply("**SYNTAX:** !stats <username>");
+        if (!Func.getParams(message)) return message.reply("**SYNTAX:** !stats <username>");
 
         request.get('http://typeracerdata.com/api?username=' + Func.getParams(message)[1], function(error, response, body) {    
-            if (error || !body || response.statusCode != 200) return message.channel.reply("The username you have entered could not be found, please try again!");
+            if (error || !body || response.statusCode != 200) return message.reply("The username you have entered could not be found, please try again!");
             data = JSON.parse(body);
 
             /* Shouldn't have to add this, but we'll try */
-            if (!data) return message.channel.reply("Uh oh, there is c")
+            if (!data) return message.reply("There was a problem, please try again!")
             
             let last = new Date(data.account.last_import * 1000);
             let marathon = new Date(data.account.marathon_start * 1000);
@@ -42,7 +42,7 @@ module.exports = function(Discord,request,Config,message) {
             try { 
                 message.channel.sendEmbed(startEmbed);
             } catch (err) {
-                message.channel.reply('There was a problem, please try again!');
+                message.reply('There was a problem, please try again!');
             }
         });
     }
