@@ -5,7 +5,7 @@ const     request             = require('request');
 const     Config              = require(__dirname + '/libs/config.js');
 const     Entities            = require('html-entities').XmlEntities;
 const     Discord             = require('discord.js');
-const     client              = new Discord.Client({autoReconnect:true});
+const     client              = new Discord.Client();
 
 /* Bot */
 client.on('ready', () => {
