@@ -26,10 +26,7 @@ async def on_ready():
 async def on_message(message):
     """ When user sends a message """
     # pylint: disable=C0301
-
-    args = message.content.split(' ')
-    if args:
-        cmd = args[1]
+    print("{}(#{}) / {}: {}".format(message.server, message.channel, message.author, message.content))
 
     if message.content.startswith('!test'):
         counter = 0
@@ -41,22 +38,27 @@ async def on_message(message):
         await client.edit_message(tmp, 'You have {} messages.'.format(counter))
 
     elif message.content.startswith('!stats') or message.content.startswith('!s'):
-        if cmd is None:
+        args = message.content.split(' ')
+
+        if args[1] is None:
             await client.send_message(message.channel, '!stats <username')
 
-        response = urllib.request.urlopen('http://typeracerdata.com/api?username=' + cmd)
-        data = data = json.load(response)
+        try:
+            response = urllib.request.urlopen('http://typeracerdata.com/api?username=' + args[1])
+            data = data = json.load(response)
+        except ValueError:
+            await client.send_message(message.channel, 'The username you have entered does not exist, please try again!')
 
         timezone = 'UTC'
         marathon = datetime.datetime.fromtimestamp(float(data['account']['marathon_start'])).strftime('%Y-%m-%d %H:%M:%S') + ' ' + timezone
         lastimport = datetime.datetime.fromtimestamp(float(data['account']['last_import'])).strftime('%Y-%m-%d %H:%M:%S') + ' ' + timezone
 
         if data:
-            embed = discord.Embed(title='Statistics for ' + cmd, colour=0xDEADBF)
+            embed = discord.Embed(title='Statistics for ' + args[1], colour=0xDEADBF)
             embed.add_field(name='\u200b', value='__**General Statistics**__', inline=False)
             embed.add_field(name='Races:', value=data['account']['races'] + ' (' + data['account']['wins'] + ' won)')
             embed.add_field(name='Texts:', value=data['account']['texts_raced'])
-            embed.add_field(name='Marathon:', value=data['account']['marathon_total'] + ' on ' + marathon)
+            embed.add_field(name='Marathon:', value=data['account']['marathon_total'] + ' races on ' + marathon)
             embed.add_field(name='\u200b', value='__**WPM Statistics**__', inline=False)
             embed.add_field(name='Career Avg:', value='%.2f' % float(data['account']['wpm_life']) + ' WPM')
             embed.add_field(name='Highest:', value='%.2f' % float(data['account']['wpm_highest']) + ' WPM')
@@ -65,11 +67,9 @@ async def on_message(message):
             embed.set_footer(text='Last Imported: ' + lastimport)
 
             await client.send_message(message.channel, embed=embed)
-        elif data is None or False:
-            await client.send_message(message.channel, 'The username you have entered does not exist, please try again!')
 
     elif message.content.startswith('!exit'):
-        sys.exit()
         await client.send_message(message.channel, 'Closing')
+        sys.exit()
 
 client.run(CONFIG['Discord'])
