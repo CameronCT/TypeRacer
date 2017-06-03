@@ -28,14 +28,8 @@ async def on_message(message):
     # pylint: disable=C0301
     print("{}(#{}) / {}: {}".format(message.server, message.channel, message.author, message.content))
 
-    if message.content.startswith('!test'):
-        counter = 0
-        tmp = await client.send_message(message.channel, 'Calculating messages...')
-        async for log in client.logs_from(message.channel, limit=100):
-            if log.author == message.author:
-                counter += 1
-
-        await client.edit_message(tmp, 'You have {} messages.'.format(counter))
+    if message.content.startswith('!help') or message.content.startswith('!h'):
+        await client.send_message(message.channel, 'Welcome! Type !stats to check a user\'s statistics!)
 
     elif message.content.startswith('!stats') or message.content.startswith('!s'):
         args = message.content.split(' ')
@@ -54,7 +48,7 @@ async def on_message(message):
         lastimport = datetime.datetime.fromtimestamp(float(data['account']['last_import'])).strftime('%Y-%m-%d %H:%M:%S') + ' ' + timezone
 
         if data:
-            embed = discord.Embed(title='Statistics for ' + args[1], colour=0xDEADBF)
+            embed = discord.Embed(title='Statistics for ' + args[1], colour=0x00e5ee)
             embed.add_field(name='\u200b', value='__**General Statistics**__', inline=False)
             embed.add_field(name='Races:', value=data['account']['races'] + ' (' + data['account']['wins'] + ' won)')
             embed.add_field(name='Texts:', value=data['account']['texts_raced'])
@@ -69,7 +63,10 @@ async def on_message(message):
             await client.send_message(message.channel, embed=embed)
 
     elif message.content.startswith('!exit'):
-        await client.send_message(message.channel, 'Closing')
-        sys.exit()
+        if message.author.roles.permissions.kick_members:
+            await client.send_message(message.channel, 'Closing')
+            sys.exit()
+        else:
+            await client.send_message(message.channel, 'You are not authorized to perform this command!')
 
 client.run(CONFIG['Discord'])
