@@ -29,7 +29,7 @@ async def on_message(message):
     print("{}(#{}) / {}: {}".format(message.server, message.channel, message.author, message.content))
 
     if message.content.startswith('!help') or message.content.startswith('!h'):
-        await client.send_message(message.channel, 'Welcome! Type !stats to check a user\'s statistics!)
+        await client.send_message(message.channel, 'Welcome! Type !stats to check a user\'s statistics!')
 
     elif message.content.startswith('!stats') or message.content.startswith('!s'):
         args = message.content.split(' ')
