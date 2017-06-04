@@ -9,19 +9,20 @@ import datetime
 import json
 import urllib.request
 import discord
+from methods import send_reply
 
 async def execute(client, message):
     """ Executes the command !stats """
     args = message.content.split(' ')
 
     if len(args) is 1:
-        await client.send_message(message.channel, 'SYNTAX: !stats <username>')
+        await send_reply(client, message.channel, message.author.id, 'Please use the correct syntax. !stats <username>', True)
     else:
         try:
             response = urllib.request.urlopen('http://typeracerdata.com/api?username=' + args[1])
             data = json.load(response)
         except ValueError:
-            await client.send_message(message.channel, 'The username you have entered does not exist, please try again!')
+            await send_reply(client, message.channel, message.author.id, 'the username you have entered does not exist, please try again!')
 
         if data:
             timezone = 'UTC'

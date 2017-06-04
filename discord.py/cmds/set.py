@@ -7,7 +7,7 @@
 """
 # pylint: disable=C0301
 
-from methods import user_string
+from methods import send_reply
 
 async def execute(config, client, message):
     """ Executes the command !set """
@@ -15,15 +15,15 @@ async def execute(config, client, message):
     args = message.content.split(' ')
 
     if len(args) <= 2:
-        await client.send_message(message.channel, user_string(message.author.id) + ', SYNTAX: !set <cmd> <true/false>')
+        await send_reply(client, message.channel, message.author.id, 'Please use the correct syntax. !set <cmd> <true/false>', True)
     else:
         if args[1] not in config['Commands']:
-            err = message.author + ', The command you have entered could not be found, please try again!'
+            err = send_reply(client, message.channel, message.author.id, 'the command you have entered could not be found, please try again!')
 
         if args[2] not in ('true', 'false'):
-            err = message.author + ', You can only set the command to true or false, please try again!'
+            err = send_reply(client, message.channel, message.author.id, 'you can only set the command to true or false, please try again!')
 
         if not err:
-            await client.send_message(message.channel, message.author + ', You have set !' + args[1] + ' to ' + args[2])
+            await send_reply(client, message.channel, message.author.id, 'you have set !' + args[1] + ' to ' + args[2])
         else:
             await client.send_message(message.channel, err)
