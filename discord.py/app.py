@@ -4,7 +4,7 @@
 import sys
 import json
 import discord
-from cmds import stats
+from cmds import info, stats
 
 client = discord.Client()
 
@@ -27,7 +27,7 @@ async def on_message(message):
     print("{}(#{}) / {}: {}".format(message.server, message.channel, message.author, message.content))
 
     if message.content.startswith('!help') or message.content.startswith('!h'):
-        await client.send_message(message.channel, 'Welcome! Type !stats to check a user\'s statistics!')
+        await info.execute(client, message)
 
     elif message.content.startswith('!stats') or message.content.startswith('!s'):
         await stats.execute(client, message)
