@@ -6,7 +6,7 @@
 import sys
 import json
 import discord
-from cmds import info, stats, dev
+from cmds import info, stats, dev, set
 
 client = discord.Client()
 
@@ -31,14 +31,17 @@ async def on_message(message):
     """ When user sends a message """
     print("{}(#{}) / {}: {}".format(message.server, message.channel, message.author, message.content))
 
-    if message.content.startswith('!help') or message.content.startswith('!h'):
+    if message.content.startswith('!help'):
         await info.execute(client, message)
 
-    elif message.content.startswith('!stats') or message.content.startswith('!s'):
+    elif message.content.startswith('!stats'):
         await stats.execute(client, message)
 
     elif message.content.startswith('!dev'):
         await dev.execute(client, message)
+
+    elif message.content.startswith('!set'):
+        await set.execute(CONFIG, client, message)
 
     elif message.content.startswith('!exit'):
         if message.channel.permissions_for(message.author).kick_members:
