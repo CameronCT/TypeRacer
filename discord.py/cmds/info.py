@@ -15,6 +15,7 @@ async def execute(client, message):
     embed.add_field(name='\u200b', value='__**General**__', inline=False)
     embed.add_field(name='!help', value='The command you are viewing\u200b', inline=True)
     embed.add_field(name='!stats', value='Check the statistics of a TypeRacer user', inline=True)
+    embed.add_field(name='!dev', value='Find the latest updates to the bot', inline=True)
 
 
     await client.send_message(message.channel, embed=embed)
