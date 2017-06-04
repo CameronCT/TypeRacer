@@ -1,10 +1,12 @@
-""" TypeRacer Bot """
+""" 
+    TypeRacer Bot 
+"""
 # pylint: disable=C0103,C0301
 
 import sys
 import json
 import discord
-from cmds import info, stats
+from cmds import info, stats, dev
 
 client = discord.Client()
 
@@ -21,6 +23,7 @@ async def on_ready():
     print('------')
 
     getMembers = sum(1 for x in client.get_all_members() if x.status.value != 'offline' and x.status.value != 'invisible')
+    await client.change_presence(game=discord.Game(name='!help | ' + str(getMembers) + ' Typists'))
 
 @client.event
 async def on_message(message):
@@ -34,6 +37,9 @@ async def on_message(message):
     elif message.content.startswith('!stats') or message.content.startswith('!s'):
         await stats.execute(client, message)
 
+    elif message.content.startswith('!dev'):
+        await dev.execute(client, message)
+
     elif message.content.startswith('!exit'):
         if message.channel.permissions_for(message.author).kick_members:
             await client.send_message(message.channel, 'I\'m a bot, beep, beep, beep. Error: Bot not found, piss and shit.')
@@ -42,3 +48,4 @@ async def on_message(message):
             await client.send_message(message.channel, 'You are not authorized to perform this command!')
 
 client.run(CONFIG['Discord'])
+""" https://api.github.com/repos/CameronCT/TypeRacer/git/refs/heads/master """
