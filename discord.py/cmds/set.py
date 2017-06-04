@@ -15,15 +15,22 @@ async def execute(config, client, message):
     args = message.content.split(' ')
 
     if len(args) <= 2:
-        await send_reply(client, message.channel, message.author.id, 'Please use the correct syntax. !set <cmd> <true/false>', True)
+        await send_reply(client, message.channel, message.author.id, 'Please use the correct syntax. **!set <help/stats/dev/etc>** <on/off>', True)
     else:
         if args[1] not in config['Commands']:
-            err = send_reply(client, message.channel, message.author.id, 'the command you have entered could not be found, please try again!')
+            err = 'the command you have entered could not be found, please try again!'
 
-        if args[2] not in ('true', 'false'):
-            err = send_reply(client, message.channel, message.author.id, 'you can only set the command to true or false, please try again!')
+        if args[2].lower() not in ('on', 'off'):
+            err = 'you can only set the command to true or false, please try again!'
 
         if not err:
-            await send_reply(client, message.channel, message.author.id, 'you have set !' + args[1] + ' to ' + args[2])
+            cmd = True
+            if args[2].lower() is 'on':
+                cmd = True
+            elif args[2].lower() is 'off':
+                cmd = False
+
+            config['Commands'][args[1]] = cmd
+            await send_reply(client, message.channel, message.author.id, 'you have set **!' + args[1] + '** to **' + args[2] + '!**')
         else:
-            await client.send_message(message.channel, err)
+            await send_reply(client, message.channel, message.author.id, err)

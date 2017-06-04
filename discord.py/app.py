@@ -51,4 +51,4 @@ async def on_message(message):
             await client.send_message(message.channel, 'You are not authorized to perform this command!')
 
 client.run(CONFIG['Discord'])
-""" https://api.github.com/repos/CameronCT/TypeRacer/git/refs/heads/master """
+
