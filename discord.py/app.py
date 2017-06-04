@@ -7,7 +7,7 @@ import datetime
 import time
 
 client = discord.Client() # pylint: disable=C0103
-timer = int(time.time)
+timer = time.time
 
 """ Grab Config.json and make it a global variable """
 with open('config.json') as data_file:
@@ -32,7 +32,7 @@ async def on_message(message):
 
     elif message.content.startswith('!stats') or message.content.startswith('!s'):
         args = message.content.split(' ')
-        diff = timer - int(time.time)
+        diff = timer - time.time
 
         if diff < CONFIG['Delay']:
             await client.send_message(message.channel, 'Please wait a few seconds before using this command again!')
