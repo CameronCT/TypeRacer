@@ -4,11 +4,10 @@ import urllib.request
 import json
 import discord
 import datetime
-
-datetime.datetime.fromtimestamp(int("1284101485")
-    ).strftime('%Y-%m-%d %H:%M:%S')
+import time
 
 client = discord.Client() # pylint: disable=C0103
+timer = int(time.time)
 
 """ Grab Config.json and make it a global variable """
 with open('config.json') as data_file:
@@ -33,6 +32,10 @@ async def on_message(message):
 
     elif message.content.startswith('!stats') or message.content.startswith('!s'):
         args = message.content.split(' ')
+        diff = timer - int(time.time)
+
+        if diff < CONFIG['Delay']:
+            await client.send_message(message.channel, 'Please wait a few seconds before using this command again!')
 
         if args[1] is None:
             await client.send_message(message.channel, '!stats <username')
