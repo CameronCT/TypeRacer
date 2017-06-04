@@ -3,6 +3,7 @@
 
 import sys, json, datetime, urllib.request
 import discord
+from .cmds import stats
 
 client = discord.Client()
 
@@ -29,38 +30,10 @@ async def on_message(message):
         await client.send_message(message.channel, 'Welcome! Type !stats to check a user\'s statistics!')
 
     elif message.content.startswith('!stats') or message.content.startswith('!s'):
-        args = message.content.split(' ')
-
-        if args[1] is None:
-            await client.send_message(message.channel, '!stats <username')
-
-        try:
-            response = urllib.request.urlopen('http://typeracerdata.com/api?username=' + args[1])
-            data = data = json.load(response)
-        except ValueError:
-            await client.send_message(message.channel, 'The username you have entered does not exist, please try again!')
-
-        timezone = 'UTC'
-        marathon = datetime.datetime.fromtimestamp(float(data['account']['marathon_start'])).strftime('%Y-%m-%d %H:%M:%S') + ' ' + timezone
-        lastimport = datetime.datetime.fromtimestamp(float(data['account']['last_import'])).strftime('%Y-%m-%d %H:%M:%S') + ' ' + timezone
-
-        if data:
-            embed = discord.Embed(title='Statistics for ' + args[1], colour=0x00e5ee)
-            embed.add_field(name='\u200b', value='__**General Statistics**__', inline=False)
-            embed.add_field(name='Races:', value=data['account']['races'] + ' (' + data['account']['wins'] + ' won)')
-            embed.add_field(name='Texts:', value=data['account']['texts_raced'])
-            embed.add_field(name='Marathon:', value=data['account']['marathon_total'] + ' races on ' + marathon)
-            embed.add_field(name='\u200b', value='__**WPM Statistics**__', inline=False)
-            embed.add_field(name='Career Avg:', value='%.2f' % float(data['account']['wpm_life']) + ' WPM')
-            embed.add_field(name='Highest:', value='%.2f' % float(data['account']['wpm_highest']) + ' WPM')
-            embed.add_field(name='Text Bests:', value='%.2f' % float(data['account']['wpm_textbests']) + ' WPM')
-            embed.add_field(name='Last 10:', value='%.2f' % float(data['account']['wpm_last10']) + ' WPM ' + '(' + '%.2f' % float(data['account']['wpm_bestlast10']) + ' peak)')
-            embed.set_footer(text='Last Imported: ' + lastimport)
-
-            await client.send_message(message.channel, embed=embed)
+        stats.executeStats()
 
     elif message.content.startswith('!exit'):
-        if message.author.name is "GNiK":
+        if message.channel.permissions_for(message.author).kick_members:
             await client.send_message(message.channel, 'Closing')
             sys.exit()
         else:
