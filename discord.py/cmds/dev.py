@@ -31,6 +31,8 @@ async def execute(client, message):
             embed = discord.Embed(colour=0x00e5ee, url='https://github.com/CameronCT/TypeRacer/commit/' + data['sha'])
             embed.set_author(name='GitHub', icon_url='https://assets-cdn.github.com/images/modules/logos_page/GitHub-Mark.png')
             embed.set_thumbnail(url='https://avatars3.githubusercontent.com/u/11495748')
-            embed.add_field(name='Last commit: ' + data['sha'] + ' on ' + data['committer']['date'] + '.', value='\u200b', inline=False)
+            embed.add_field(name='Commit:', value=data['sha'], inline=False)
+            embed.add_field(name='Message:', value=data['message'], inline=False)
+            embed.set_footer(text='Last commit on ' + data['committer']['date'] + '.')
 
             await client.send_message(message.channel, embed=embed)
