@@ -7,21 +7,23 @@
 """
 # pylint: disable=C0301
 
+from methods import user_string
+
 async def execute(config, client, message):
     """ Executes the command !set """
     err = ''
     args = message.content.split(' ')
 
     if len(args) <= 2:
-        err = 'SYNTAX: !set <cmd> <true/false>'
-
-    if args[1] not in config['Commands']:
-        err = 'The command you have entered could not be found, please try again!'
-
-    if args[2] is not True and args[2] is not False:
-        err = 'You can only set the command to true or false, please try again!'
-
-    if err is None:
-        await client.send_message(message.channel, 'You have set !' + cmd + ' to ' + str(val))
+        await client.send_message(message.channel, user_string(message.author.id) + ', SYNTAX: !set <cmd> <true/false>')
     else:
-        await client.send_message(message.channel, err)
+        if args[1] not in config['Commands']:
+            err = message.author + ', The command you have entered could not be found, please try again!'
+
+        if args[2] not in ('true', 'false'):
+            err = message.author + ', You can only set the command to true or false, please try again!'
+
+        if not err:
+            await client.send_message(message.channel, message.author + ', You have set !' + args[1] + ' to ' + args[2])
+        else:
+            await client.send_message(message.channel, err)
