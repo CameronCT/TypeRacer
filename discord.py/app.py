@@ -1,13 +1,10 @@
 """ TypeRacer Bot """
-import sys
-import urllib.request
-import json
-import discord
-import datetime
-import time
+# pylint: disable=C0103,C0410
 
-client = discord.Client() # pylint: disable=C0103
-timer = time.time
+import sys, json, datetime, urllib.request
+import discord
+
+client = discord.Client()
 
 """ Grab Config.json and make it a global variable """
 with open('config.json') as data_file:
@@ -23,6 +20,7 @@ async def on_ready():
 
 @client.event
 async def on_message(message):
+
     """ When user sends a message """
     # pylint: disable=C0301
     print("{}(#{}) / {}: {}".format(message.server, message.channel, message.author, message.content))
@@ -32,10 +30,6 @@ async def on_message(message):
 
     elif message.content.startswith('!stats') or message.content.startswith('!s'):
         args = message.content.split(' ')
-        diff = timer - time.time
-
-        if diff < CONFIG['Delay']:
-            await client.send_message(message.channel, 'Please wait a few seconds before using this command again!')
 
         if args[1] is None:
             await client.send_message(message.channel, '!stats <username')
@@ -66,7 +60,7 @@ async def on_message(message):
             await client.send_message(message.channel, embed=embed)
 
     elif message.content.startswith('!exit'):
-        if message.author.roles.permissions.kick_members:
+        if message.author.name is "GNiK":
             await client.send_message(message.channel, 'Closing')
             sys.exit()
         else:
