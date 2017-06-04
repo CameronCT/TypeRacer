@@ -1,7 +1,16 @@
-import datetime, json, urllib.request
+"""
+    File: stats.py
+    Description: Executes the command !s or !stats
+    Last Modified: 6/4/2017
+"""
+# pylint: disable=C0301
+
+import datetime
+import json
+import urllib.request
 import discord
 
-async def execute(client,message):
+async def execute(client, message):
     """ Executes the command !stats """
     args = message.content.split(' ')
 
@@ -10,15 +19,15 @@ async def execute(client,message):
 
     try:
         response = urllib.request.urlopen('http://typeracerdata.com/api?username=' + args[1])
-        data = data = json.load(response)
+        data = json.load(response)
     except ValueError:
         await client.send_message(message.channel, 'The username you have entered does not exist, please try again!')
 
-    timezone = 'UTC'
-    marathon = datetime.datetime.fromtimestamp(float(data['account']['marathon_start'])).strftime('%Y-%m-%d %H:%M:%S') + ' ' + timezone
-    lastimport = datetime.datetime.fromtimestamp(float(data['account']['last_import'])).strftime('%Y-%m-%d %H:%M:%S') + ' ' + timezone
-
     if data:
+        timezone = 'UTC'
+        marathon = datetime.datetime.fromtimestamp(float(data['account']['marathon_start'])).strftime('%Y-%m-%d %H:%M:%S') + ' ' + timezone
+        lastimport = datetime.datetime.fromtimestamp(float(data['account']['last_import'])).strftime('%Y-%m-%d %H:%M:%S') + ' ' + timezone
+
         embed = discord.Embed(colour=0x00e5ee)
         embed.set_author(name='Statistics for ' + args[1], icon_url='http://data.typeracer.com/misc/pic?uid=tr:' + args[1] + '&size=large&bpc=1')
         embed.set_thumbnail(url='http://data.typeracer.com/misc/pic?uid=tr:' + args[1] + '&size=large&bpc=1')

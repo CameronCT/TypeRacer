@@ -1,7 +1,8 @@
 """ TypeRacer Bot """
-# pylint: disable=C0103,C0410
+# pylint: disable=C0103,C0301
 
-import sys, json
+import sys
+import json
 import discord
 from cmds import stats
 
@@ -23,7 +24,6 @@ async def on_ready():
 async def on_message(message):
 
     """ When user sends a message """
-    # pylint: disable=C0301
     print("{}(#{}) / {}: {}".format(message.server, message.channel, message.author, message.content))
 
     if message.content.startswith('!help') or message.content.startswith('!h'):
