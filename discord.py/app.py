@@ -20,6 +20,8 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
+    getMembers = sum(1 for x in client.get_all_members() if x.status.value != 'offline' and x.status.value != 'invisible')
+
 @client.event
 async def on_message(message):
 
@@ -34,7 +36,7 @@ async def on_message(message):
 
     elif message.content.startswith('!exit'):
         if message.channel.permissions_for(message.author).kick_members:
-            await client.send_message(message.channel, 'Closing')
+            await client.send_message(message.channel, 'I\'m a bot, beep, beep, beep. Error: Bot not found, piss and shit.')
             sys.exit()
         else:
             await client.send_message(message.channel, 'You are not authorized to perform this command!')
