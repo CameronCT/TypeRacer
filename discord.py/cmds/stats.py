@@ -1,7 +1,8 @@
-import sys, json, datetime, urllib.request
+import datetime, json, urllib.request
 import discord
 
-def executeStats():
+async def execute(client,message):
+    """ Executes the command !stats """
     args = message.content.split(' ')
 
     if args[1] is None:

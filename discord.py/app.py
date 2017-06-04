@@ -1,9 +1,9 @@
 """ TypeRacer Bot """
 # pylint: disable=C0103,C0410
 
-import sys, json, datetime, urllib.request
+import sys, json
 import discord
-from .cmds import stats
+from cmds import stats
 
 client = discord.Client()
 
@@ -30,7 +30,7 @@ async def on_message(message):
         await client.send_message(message.channel, 'Welcome! Type !stats to check a user\'s statistics!')
 
     elif message.content.startswith('!stats') or message.content.startswith('!s'):
-        stats.executeStats()
+        await stats.execute(client, message)
 
     elif message.content.startswith('!exit'):
         if message.channel.permissions_for(message.author).kick_members:
