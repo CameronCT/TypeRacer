@@ -13,7 +13,7 @@ from methods import send_reply
 
 async def execute(client, message, config):
     """ Executes the command !stats """
-    if config['Commands']['help'] is True:
+    if config['Commands']['help'] is True or message.channel.permissions_for(message.author).kick_members:
         try:
             response = urllib.request.urlopen('https://api.github.com/repos/CameronCT/TypeRacer/git/refs/heads/master')
             datarepo = json.load(response)

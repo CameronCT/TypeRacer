@@ -14,7 +14,7 @@ from methods import send_reply
 async def execute(client, message, config):
     """ Executes the command !stats """
 
-    if config['Commands']['stats'] is True:
+    if config['Commands']['stats'] is True or message.channel.permissions_for(message.author).kick_members:
         args = message.content.split(' ')
 
         if len(args) is 1:

@@ -10,7 +10,7 @@ from methods import send_reply
 
 async def execute(client, message, config):
     """ Executes the command !help """
-    if config['Commands']['help'] is True:
+    if config['Commands']['help'] is True or message.channel.permissions_for(message.author).kick_members:
         embed = discord.Embed(colour=0x00e5ee)
         embed.set_author(name='Hello! I\'m a bot, beep beep bloop')
         embed.add_field(name='\u200b', value='__**General**__', inline=False)
