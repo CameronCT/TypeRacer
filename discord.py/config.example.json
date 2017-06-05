@@ -3,12 +3,18 @@
     "Author":    "CameronCT",
     "Version":   "1.0.0",
 
+    "Owner":    "",
+
     "Delay":    5,
 
     "Commands": {
         "help":     true,
         "stats":    true,
         "dev":      true
+    },
+
+    "Channels": {
+        "report":   "report"
     },
 
     "Discord":    ""
