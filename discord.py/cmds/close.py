@@ -12,7 +12,7 @@ from methods import send_reply
 
 async def execute_status(client, message, config):
     """ Executes the command !close """
-    if message.channel.permissions_for(message.author).ban_members:
+    if message.channel.permissions_for(message.author).ban_members or message.author.id == config['Owner']:
         await client.send_message(message.channel, 'I\'m a bot, beep, beep, beep. Error: Bot not found, piss and shit.')
         sys.exit()
     else:
