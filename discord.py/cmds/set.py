@@ -49,7 +49,7 @@ async def execute_status(client, message, config):
         if not err:
             cmd = 'On'
             if config['Commands'][args[1]] is True:
-                cmd = 'On'
+                cmd = 'On' + str(config['Commands'][args[1]])
             else:
                 cmd = 'Off'
 
