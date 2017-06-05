@@ -5,7 +5,7 @@
 
 import json
 import discord
-from cmds import info, stats, dev, status, close
+from cmds import info, stats, dev, status, close, report
 
 client = discord.Client()
 
@@ -35,6 +35,9 @@ async def on_message(message):
 
     elif message.content.startswith('!stats'):
         await stats.execute(client, message, config)
+
+    elif message.content.startswith('!report'):
+        await report.execute(client, message, config)
 
     elif message.content.startswith('!dev'):
         await dev.execute(client, message, config)
