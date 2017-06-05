@@ -1,5 +1,5 @@
 """
-    File: set.py
+    File: status.py
     Description: Executes the command !set
     Last Modified: 6/4/2017
 

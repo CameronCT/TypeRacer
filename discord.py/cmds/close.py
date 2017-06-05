@@ -1,6 +1,6 @@
 """
-    File: set.py
-    Description: Executes the command !set
+    File: close.py
+    Description: Executes the command !close
     Last Modified: 6/4/2017
 
     if args[1] is None or config['Commands'][args[1]] is None:
