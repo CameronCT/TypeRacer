@@ -25,12 +25,14 @@ async def execute(client, message, config):
 
         if not err:
             cmd = True
-            if args[2].lower() is 'on':
+            if args[2].lower() == 'on':
                 cmd = True
-            elif args[2].lower() is 'off':
+            else:
                 cmd = False
 
             config['Commands'][args[1]] = cmd
+
+
             await send_reply(client, message.channel, message.author.id, 'you have set **!' + args[1] + '** to **' + args[2] + '**!')
         else:
             await send_reply(client, message.channel, message.author.id, err)
@@ -49,11 +51,10 @@ async def execute_status(client, message, config):
         if not err:
             cmd = 'On'
             if config['Commands'][args[1]] is True:
-                cmd = 'On' + str(config['Commands'][args[1]])
+                cmd = 'On'
             else:
                 cmd = 'Off'
 
-            config['Commands'][args[1]] = cmd
             await send_reply(client, message.channel, message.author.id, 'the command **!' + args[1] + '** is set to **' + cmd + '**!')
         else:
             await send_reply(client, message.channel, message.author.id, err)

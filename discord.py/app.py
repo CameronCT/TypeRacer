@@ -1,12 +1,12 @@
 """ 
-    TypeRacer Bot 
+    TypeRacer Bot
 """
 # pylint: disable=C0103,C0301
 
 import sys
 import json
 import discord
-from cmds import info, stats, dev, set
+from cmds import info, stats, dev, status
 
 client = discord.Client()
 
@@ -41,10 +41,10 @@ async def on_message(message):
         await dev.execute(client, message, config)
 
     elif message.content.startswith('!set'):
-        await set.execute(client, message, config)
+        await status.execute(client, message, config)
 
     elif message.content.startswith('!status'):
-        await set.execute_status(client, message, config)
+        await status.execute_status(client, message, config)
 
     elif message.content.startswith('!exit'):
         if message.channel.permissions_for(message.author).kick_members:
