@@ -3,10 +3,9 @@
 """
 # pylint: disable=C0103,C0301
 
-import sys
 import json
 import discord
-from cmds import info, stats, dev, status
+from cmds import info, stats, dev, status, close
 
 client = discord.Client()
 
@@ -23,7 +22,7 @@ async def on_ready():
     print('------')
 
     getMembers = sum(1 for x in client.get_all_members() if x.status.value != 'offline' and x.status.value != 'invisible')
-    await client.change_presence(game=discord.Game(name='!help | ' + str(getMembers) + ' Typists'))
+    await client.change_presence(game=discord.Game(name='!help | ' + str(getMembers) + ' Online!'))
 
 @client.event
 async def on_message(message):
@@ -46,12 +45,8 @@ async def on_message(message):
     elif message.content.startswith('!status'):
         await status.execute_status(client, message, config)
 
-    elif message.content.startswith('!exit'):
-        if message.channel.permissions_for(message.author).kick_members:
-            await client.send_message(message.channel, 'I\'m a bot, beep, beep, beep. Error: Bot not found, piss and shit.')
-            sys.exit()
-        else:
-            await client.send_message(message.channel, 'You are not authorized to perform this command!')
+    elif message.content.startswith('!close'):
+        await close.execute_status(client, message, config)
 
 client.run(config['Discord'])
 
