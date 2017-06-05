@@ -9,7 +9,7 @@
 
 from methods import send_reply
 
-async def execute(config, client, message):
+async def execute(client, message, config):
     """ Executes the command !set """
     err = ''
     args = message.content.split(' ')
@@ -32,5 +32,28 @@ async def execute(config, client, message):
 
             config['Commands'][args[1]] = cmd
             await send_reply(client, message.channel, message.author.id, 'you have set **!' + args[1] + '** to **' + args[2] + '**!')
+        else:
+            await send_reply(client, message.channel, message.author.id, err)
+
+async def execute_status(client, message, config):
+    """ Executes the command !set """
+    err = ''
+    args = message.content.split(' ')
+
+    if len(args) <= 1:
+        await send_reply(client, message.channel, message.author.id, 'Please use the correct syntax. **!status <help/stats/dev/etc>**', True)
+    else:
+        if args[1] not in config['Commands']:
+            err = 'the command you have entered could not be found, please try again!'
+
+        if not err:
+            cmd = 'On'
+            if config['Commands'][args[1]] is True:
+                cmd = 'On'
+            else:
+                cmd = 'Off'
+
+            config['Commands'][args[1]] = cmd
+            await send_reply(client, message.channel, message.author.id, 'the command **!' + args[1] + '** is set to **' + cmd + '**!')
         else:
             await send_reply(client, message.channel, message.author.id, err)

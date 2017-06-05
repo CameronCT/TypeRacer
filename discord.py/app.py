@@ -10,9 +10,9 @@ from cmds import info, stats, dev, set
 
 client = discord.Client()
 
-""" Grab Config.json and make it a global variable """
+""" Grab config.json and make it a global variable """
 with open('config.json') as data_file:
-    CONFIG = json.load(data_file)
+    config = json.load(data_file)
 
 @client.event
 async def on_ready():
@@ -32,16 +32,19 @@ async def on_message(message):
     print("{}(#{}) / {}: {}".format(message.server, message.channel, message.author, message.content))
 
     if message.content.startswith('!help'):
-        await info.execute(client, message)
+        await info.execute(client, message, config)
 
     elif message.content.startswith('!stats'):
-        await stats.execute(client, message)
+        await stats.execute(client, message, config)
 
     elif message.content.startswith('!dev'):
-        await dev.execute(client, message)
+        await dev.execute(client, message, config)
 
     elif message.content.startswith('!set'):
-        await set.execute(CONFIG, client, message)
+        await set.execute(client, message, config)
+
+    elif message.content.startswith('!status'):
+        await set.execute_status(client, message, config)
 
     elif message.content.startswith('!exit'):
         if message.channel.permissions_for(message.author).kick_members:
@@ -50,5 +53,5 @@ async def on_message(message):
         else:
             await client.send_message(message.channel, 'You are not authorized to perform this command!')
 
-client.run(CONFIG['Discord'])
+client.run(config['Discord'])
 
