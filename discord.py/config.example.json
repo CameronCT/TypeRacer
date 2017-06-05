@@ -5,5 +5,11 @@
 
     "Delay":    5,
 
+    "Commands": {
+        "help":     true,
+        "stats":    true,
+        "dev":      true
+    },
+
     "Discord":    ""
 }
