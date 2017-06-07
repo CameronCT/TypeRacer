@@ -45,6 +45,8 @@ async def execute(client, message, config):
                 embed.add_field(name='Last 10:', value='%.2f' % float(data['account']['wpm_last10']) + ' WPM ' + '(' + '%.2f' % float(data['account']['wpm_bestlast10']) + ' peak)')
                 embed.set_footer(text='Updated on ' + lastimport)
 
+                await client.send_typing(message.channel)
                 await client.send_message(message.channel, embed=embed)
     else:
+        await client.send_typing(message.channel)
         await send_reply(client, message.channel, message.author.id, 'this command has been temporarily disabled!')

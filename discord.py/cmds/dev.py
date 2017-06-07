@@ -36,6 +36,8 @@ async def execute(client, message, config):
                 embed.add_field(name='Message:', value=data['message'], inline=False)
                 embed.set_footer(text='Last commit on ' + data['committer']['date'] + '.')
 
+                await client.send_typing(message.channel)
                 await client.send_message(message.channel, embed=embed)
     else:
+        await client.send_typing(message.channel)
         await client.send_message(message.channel, 'This command has been temporarily disabled!')

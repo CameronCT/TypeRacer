@@ -16,4 +16,5 @@ async def execute_status(client, message, config):
         await send_reply(client, message.channel, message.author.id, 'I\'m a bot, beep, beep, beep. Error: Bot not found, piss and shit.')
         sys.exit()
     else:
+        await client.send_typing(message.channel)
         await send_reply(client, message.channel, message.author.id, 'you are not authorized to perform this command!')

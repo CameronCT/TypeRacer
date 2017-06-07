@@ -18,6 +18,8 @@ async def execute(client, message, config):
         embed.add_field(name='!stats', value='Check the statistics of a TypeRacer user', inline=True)
         embed.add_field(name='!dev', value='Find the latest updates to the bot', inline=True)
 
+        await client.send_typing(message.channel)
         await client.send_message(message.channel, embed=embed)
     else:
+        await client.send_typing(message.channel)
         await send_reply(client, message.channel, message.author.id, 'this command has been temporarily disabled!')

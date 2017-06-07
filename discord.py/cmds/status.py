@@ -16,7 +16,7 @@ async def execute(client, message, config):
         args = message.content.split(' ')
 
         if len(args) <= 2:
-            await send_reply(client, message.channel, message.author.id, 'Please use the correct syntax. **!set <help/stats/dev/etc> <on/off>**', True)
+            await send_reply(client, message.channel, message.author.id, 'Please use the correct syntax. **!set <help/stats/dev/pas> <on/off>**', True)
         else:
             if args[1] not in config['Commands']:
                 err = 'the command you have entered could not be found, please try again!'
@@ -33,9 +33,10 @@ async def execute(client, message, config):
 
                 config['Commands'][args[1]] = cmd
 
-
+                await client.send_typing(message.channel)
                 await send_reply(client, message.channel, message.author.id, 'you have set **!' + args[1] + '** to **' + args[2] + '**!')
             else:
+                await client.send_typing(message.channel)
                 await send_reply(client, message.channel, message.author.id, err)
     else:
         await send_reply(client, message.channel, message.author.id, 'you are not authorized to perform this command!')
@@ -43,22 +44,28 @@ async def execute(client, message, config):
 
 async def execute_status(client, message, config):
     """ Executes the command !set """
-    err = ''
-    args = message.content.split(' ')
+    if config['Commands']['status'] is True or message.channel.permissions_for(message.author).kick_members or message.author.id == config['Owner']:
+        err = ''
+        args = message.content.split(' ')
 
-    if len(args) <= 1:
-        await send_reply(client, message.channel, message.author.id, 'Please use the correct syntax. **!status <help/stats/dev/etc>**', True)
-    else:
-        if args[1] not in config['Commands']:
-            err = 'the command you have entered could not be found, please try again!'
-
-        if not err:
-            cmd = 'On'
-            if config['Commands'][args[1]] is True:
-                cmd = 'On'
-            else:
-                cmd = 'Off'
-
-            await send_reply(client, message.channel, message.author.id, 'the command **!' + args[1] + '** is set to **' + cmd + '**!')
+        if len(args) <= 1:
+            await send_reply(client, message.channel, message.author.id, 'Please use the correct syntax. **!status <help/stats/dev/etc>**', True)
         else:
-            await send_reply(client, message.channel, message.author.id, err)
+            if args[1] not in config['Commands']:
+                err = 'the command you have entered could not be found, please try again!'
+
+            if not err:
+                cmd = 'On'
+                if config['Commands'][args[1]] is True:
+                    cmd = 'On'
+                else:
+                    cmd = 'Off'
+
+                await client.send_typing(message.channel)
+                await send_reply(client, message.channel, message.author.id, 'the command **!' + args[1] + '** is set to **' + cmd + '**!')
+            else:
+                await client.send_typing(message.channel)
+                await send_reply(client, message.channel, message.author.id, err)
+    else:
+        await client.send_typing(message.channel)
+        await send_reply(client, message.channel, message.author.id, 'this command has been temporarily disabled!')
