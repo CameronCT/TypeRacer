@@ -5,7 +5,7 @@
 
 import json
 import discord
-from cmds import info, stats, dev, status, close, report
+from cmds import info, stats, dev, status, close, report, pas
 
 client = discord.Client()
 
@@ -38,6 +38,9 @@ async def on_message(message):
 
     elif message.content.startswith('!report'):
         await report.execute(client, message, config)
+
+    elif message.content.startswith('!pissandshit'):
+        await pas.execute(client, message, config)
 
     elif message.content.startswith('!dev'):
         await dev.execute(client, message, config)
