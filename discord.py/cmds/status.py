@@ -16,7 +16,7 @@ async def execute(client, message, config):
         args = message.content.split(' ')
 
         if len(args) <= 2:
-            await send_reply(client, message.channel, message.author.id, 'Please use the correct syntax. **!set <help/stats/dev/etc> <on/off>**', True)
+            await send_reply(client, message.channel, message.author.id, 'Please use the correct syntax. **!set <help/stats/dev/pas> <on/off>**', True)
         else:
             if args[1] not in config['Commands']:
                 err = 'the command you have entered could not be found, please try again!'
