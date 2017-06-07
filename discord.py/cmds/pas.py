@@ -8,12 +8,13 @@
 """
 # pylint: disable=C0301
 
-import time
-import datetime
-import discord
 from methods import send_reply
 
 async def execute(client, message, config):
     """ Executes the command !pissandshit """
-    await client.send_typing(message.channel)
-    await client.send_message(message.channel, '🐸')
+    if config['Commands']['pas'] is True or message.channel.permissions_for(message.author).kick_members or message.author.id == config['Owner']:
+        await client.send_typing(message.channel)
+        await client.send_message(message.channel, '🐸')
+    else:
+        await client.send_typing(message.channel)
+        await send_reply(client, message.channel, message.author.id, 'this command has been temporarily disabled!')
