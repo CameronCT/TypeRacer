@@ -33,9 +33,10 @@ async def execute(client, message, config):
 
                 config['Commands'][args[1]] = cmd
 
-
+                await client.send_typing(message.channel)
                 await send_reply(client, message.channel, message.author.id, 'you have set **!' + args[1] + '** to **' + args[2] + '**!')
             else:
+                await client.send_typing(message.channel)
                 await send_reply(client, message.channel, message.author.id, err)
     else:
         await send_reply(client, message.channel, message.author.id, 'you are not authorized to perform this command!')
@@ -59,6 +60,8 @@ async def execute_status(client, message, config):
             else:
                 cmd = 'Off'
 
+            await client.send_typing(message.channel)
             await send_reply(client, message.channel, message.author.id, 'the command **!' + args[1] + '** is set to **' + cmd + '**!')
         else:
+            await client.send_typing(message.channel)
             await send_reply(client, message.channel, message.author.id, err)

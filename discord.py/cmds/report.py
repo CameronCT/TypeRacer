@@ -24,4 +24,5 @@ async def execute(client, message, config):
         embed.add_field(name='Message', value=args[2], inline=False)
         embed.set_footer(text='Reported by ' + message.author.nick + ' on ' + reportstamp + '.')
 
+        await client.send_typing(message.channel)
         await client.send_message(client.get_channel(config['Channels']['report']), embed=embed)

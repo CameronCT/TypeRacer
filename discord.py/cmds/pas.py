@@ -15,4 +15,5 @@ from methods import send_reply
 
 async def execute(client, message, config):
     """ Executes the command !pissandshit """
-    await send_reply(client, message.channel, message.author.id, '🐸')
+    await client.send_typing(message.channel)
+    await client.send_message(message.channel, '🐸')
