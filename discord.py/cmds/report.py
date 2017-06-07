@@ -1,6 +1,6 @@
 """
-    File: stats.py
-    Description: Executes the command !s or !stats
+    File: report.py
+    Description: Executes the command !report
     Last Modified: 6/4/2017
 """
 # pylint: disable=C0301
@@ -11,7 +11,7 @@ import discord
 from methods import send_reply
 
 async def execute(client, message, config):
-    """ Executes the command !stats """
+    """ Executes the command !report """
     args = message.content.split(' ')
 
     reportstamp = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S') + ' UTC'
