@@ -10,7 +10,10 @@
     "Commands": {
         "help":     true,
         "stats":    true,
-        "dev":      true
+        "dev":      true,
+        "report":   true,
+        "status":   true,
+        "pas":      true
     },
 
     "Channels": {
