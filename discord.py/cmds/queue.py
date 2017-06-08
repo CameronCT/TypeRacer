@@ -1,5 +1,5 @@
 """
-    File: import.py
+    File: queue.py
     Description: Executes the command !import
     Last Modified: 6/4/2017
 """
@@ -9,7 +9,7 @@ import urllib.request
 from methods import send_reply
 
 async def execute(client, message, config):
-    """ Executes the command !import """
+    """ Executes the command !queue """
 
     if config['Commands']['import'] is True or message.channel.permissions_for(message.author).kick_members or message.author.id == config['Owner']:
         args = message.content.split(' ')
