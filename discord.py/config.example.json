@@ -10,6 +10,7 @@
     "Commands": {
         "help":     true,
         "stats":    true,
+        "import":   true,
         "dev":      true,
         "report":   true,
         "status":   true,

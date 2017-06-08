@@ -36,6 +36,9 @@ async def on_message(message):
     elif message.content.startswith('!stats'):
         await stats.execute(client, message, config)
 
+    elif message.content.startswith('!import'):
+        await import.execute(client, message, config)
+
     elif message.content.startswith('!report'):
         await report.execute(client, message, config)
 
