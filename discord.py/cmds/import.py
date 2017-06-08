@@ -5,10 +5,7 @@
 """
 # pylint: disable=C0301
 
-import datetime
-import json
 import urllib.request
-import discord
 from methods import send_reply
 
 async def execute(client, message, config):
@@ -27,7 +24,7 @@ async def execute(client, message, config):
 
             if response:
                 await client.send_typing(message.channel)
-                await send_reply(client, message.channel, message.author.id, 'you have successfully added **' + args[1] + '** to the import.')
+                await send_reply(client, message.channel, message.author.id, 'you have successfully added **' + args[1] + '** to the queue.')
     else:
         await client.send_typing(message.channel)
         await send_reply(client, message.channel, message.author.id, 'this command has been temporarily disabled!')
