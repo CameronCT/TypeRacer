@@ -27,7 +27,7 @@ async def on_ready():
         threading.Timer(15.0, updateMembers).start()
         getMembers = sum(1 for x in client.get_all_members() if x.status.value != 'offline' and x.status.value != 'invisible')
         await client.change_presence(game=discord.Game(name='!help | ' + str(getMembers) + ' Online!'))
-    
+
     await updateMembers()
 
 @client.event
