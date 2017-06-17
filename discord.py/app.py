@@ -3,6 +3,7 @@
 """
 # pylint: disable=C0103,C0301
 
+import threading
 import json
 import discord
 from cmds import info, stats, dev, status, close, report, pas, queue
@@ -21,8 +22,13 @@ async def on_ready():
     print(client.user.id)
     print('------')
 
-    getMembers = sum(1 for x in client.get_all_members() if x.status.value != 'offline' and x.status.value != 'invisible')
-    await client.change_presence(game=discord.Game(name='!help | ' + str(getMembers) + ' Online!'))
+    async def updateMembers():
+        """ Updates Game Message with amount of online users """
+        threading.Timer(15.0, updateMembers).start()
+        getMembers = sum(1 for x in client.get_all_members() if x.status.value != 'offline' and x.status.value != 'invisible')
+        await client.change_presence(game=discord.Game(name='!help | ' + str(getMembers) + ' Online!'))
+    
+    await updateMembers()
 
 @client.event
 async def on_message(message):
